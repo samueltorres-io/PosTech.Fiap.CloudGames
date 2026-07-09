@@ -1,0 +1,44 @@
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using FCG.Application.Abstractions;
+using FCG.Domain.Entities;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
+
+namespace FCG.Infrastructure.Security;
+
+public sealed class JwtTokenGenerator : IJwtTokenGenerator
+{
+    private readonly JwtSettings _settings;
+
+    public JwtTokenGenerator(IOptions<JwtSettings> options) => _settings = options.Value;
+
+    public AccessToken Generate(User user)
+    {
+        var expiresAt = DateTime.UtcNow.AddMinutes(_settings.ExpirationMinutes);
+
+        var claims = new List<Claim>
+        {
+            new(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+            new(JwtRegisteredClaimNames.Email, user.Email.Value),
+            new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+            new(ClaimTypes.Name, user.Name),
+            new(ClaimTypes.Role, user.Role.ToString())
+        };
+
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_settings.SecretKey));
+        var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        var token = new JwtSecurityToken(
+            issuer: _settings.Issuer,
+            audience: _settings.Audience,
+            claims: claims,
+            notBefore: DateTime.UtcNow,
+            expires: expiresAt,
+            signingCredentials: credentials);
+
+        var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+        return new AccessToken(jwt, expiresAt);
+    }
+}

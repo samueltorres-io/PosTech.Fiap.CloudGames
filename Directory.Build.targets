@@ -1,0 +1,9 @@
+<Project>
+
+  <!-- Importado após os .csproj: aqui $(IsTestProject) já está definido.
+       Código gerado (Reqnroll, source generators) não deve quebrar o build por warning. -->
+  <PropertyGroup Condition="'$(IsTestProject)' == 'true'">
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+  </PropertyGroup>
+
+</Project>
