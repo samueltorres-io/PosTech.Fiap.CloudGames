@@ -19,20 +19,20 @@ Nesta fase há um único contexto — **Plataforma FCG** — que engloba:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                        FCG.Api                               │
+│                        PosTech.Fiap.CloudGames.Api                               │
 │   Minimal API · Middleware · Swagger · GraphQL · JWT · DI    │
 └───────────────┬─────────────────────────────┬───────────────┘
                 │                             │
                 ▼                             ▼
       ┌───────────────────┐        ┌────────────────────────┐
-      │  FCG.Application  │        │   FCG.Infrastructure    │
+      │  PosTech.Fiap.CloudGames.Application  │        │   PosTech.Fiap.CloudGames.Infrastructure    │
       │  Casos de uso     │◄───────│  EF Core · Dapper · JWT │
       │  DTOs · Validação │        │  BCrypt · Repositórios  │
       └─────────┬─────────┘        └───────────┬────────────┘
                 │                             │
                 ▼                             ▼
               ┌───────────────────────────────────┐
-              │            FCG.Domain             │
+              │            PosTech.Fiap.CloudGames.Domain             │
               │  Entidades · VOs · Eventos ·      │
               │  Regras · Interfaces de repo      │
               └───────────────────────────────────┘

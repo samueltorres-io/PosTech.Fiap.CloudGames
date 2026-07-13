@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    <PackageReference Include="xunit" />
+    <PackageReference Include="xunit.runner.visualstudio" />
+    <PackageReference Include="coverlet.collector" />
+    <PackageReference Include="FluentAssertions" />
+    <PackageReference Include="Reqnroll.xUnit" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\PosTech.Fiap.CloudGames.Application\PosTech.Fiap.CloudGames.Application.csproj" />
+    <ProjectReference Include="..\..\src\PosTech.Fiap.CloudGames.Domain\PosTech.Fiap.CloudGames.Domain.csproj" />
+    <ProjectReference Include="..\..\src\PosTech.Fiap.CloudGames.Infrastructure\PosTech.Fiap.CloudGames.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>

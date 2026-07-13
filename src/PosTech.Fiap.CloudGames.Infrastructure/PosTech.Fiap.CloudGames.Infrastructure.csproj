@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" />
+    <PackageReference Include="Npgsql" />
+    <PackageReference Include="EFCore.NamingConventions" />
+    <PackageReference Include="Dapper" />
+    <PackageReference Include="BCrypt.Net-Next" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" />
+    <PackageReference Include="Microsoft.IdentityModel.Tokens" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" />
+    <PackageReference Include="Microsoft.Extensions.Options" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\PosTech.Fiap.CloudGames.Application\PosTech.Fiap.CloudGames.Application.csproj" />
+    <ProjectReference Include="..\PosTech.Fiap.CloudGames.Domain\PosTech.Fiap.CloudGames.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

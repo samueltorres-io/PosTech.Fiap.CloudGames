@@ -1,6 +1,6 @@
-# 🎮 FIAP Cloud Games (FCG) — API
+# 🎮 PosTech.Fiap.CloudGames — API
 
-> **Tech Challenge · Fase 1 — FIAP POSTECH**
+> **Tech Challenge · Fase 1 — FIAP POSTECH** · produto: **FIAP Cloud Games (FCG)**
 > API REST em **.NET 8** para cadastro de usuários e biblioteca de jogos adquiridos, base para as próximas fases da plataforma (matchmaking e gestão de servidores).
 
 A FCG é o MVP de uma plataforma de venda de jogos digitais. Esta primeira fase entrega um **monólito** organizado com **DDD / Clean Architecture**, persistência com **Entity Framework Core + PostgreSQL**, autenticação **JWT** com dois níveis de acesso, documentação **Swagger**, consultas de alta performance com **Dapper**, consultas dinâmicas via **GraphQL** e cobertura de testes **unitários + BDD**.
@@ -50,18 +50,18 @@ A FCG é o MVP de uma plataforma de venda de jogos digitais. Esta primeira fase 
 Monólito em camadas seguindo **Clean Architecture** e princípios de **DDD**. A regra de dependência aponta sempre para o domínio:
 
 ```
-FCG.Api  ──►  FCG.Application  ──►  FCG.Domain
+PosTech.Fiap.CloudGames.Api  ──►  PosTech.Fiap.CloudGames.Application  ──►  PosTech.Fiap.CloudGames.Domain
    │                    ▲                ▲
-   └──►  FCG.Infrastructure  ───────────┘
+   └──►  PosTech.Fiap.CloudGames.Infrastructure  ───────────┘
         (implementa as abstrações do domínio/aplicação)
 ```
 
 | Camada | Responsabilidade |
 |---|---|
-| **FCG.Domain** | Entidades, agregados, value objects, eventos, exceções e **interfaces de repositório**. Núcleo puro, sem dependências. |
-| **FCG.Application** | Casos de uso (command/query services), DTOs, validações (FluentValidation) e interfaces de serviços (`IJwtTokenGenerator`, `IPasswordHasher`…). |
-| **FCG.Infrastructure** | EF Core (`DbContext`, configurações, migrations, repositórios), Dapper, JWT, hashing BCrypt, seed. |
-| **FCG.Api** | Minimal API (endpoints por feature), middleware, Swagger, GraphQL, autenticação e composição de DI. |
+| **PosTech.Fiap.CloudGames.Domain** | Entidades, agregados, value objects, eventos, exceções e **interfaces de repositório**. Núcleo puro, sem dependências. |
+| **PosTech.Fiap.CloudGames.Application** | Casos de uso (command/query services), DTOs, validações (FluentValidation) e interfaces de serviços (`IJwtTokenGenerator`, `IPasswordHasher`…). |
+| **PosTech.Fiap.CloudGames.Infrastructure** | EF Core (`DbContext`, configurações, migrations, repositórios), Dapper, JWT, hashing BCrypt, seed. |
+| **PosTech.Fiap.CloudGames.Api** | Minimal API (endpoints por feature), middleware, Swagger, GraphQL, autenticação e composição de DI. |
 
 Detalhes em [docs/arquitetura.md](docs/arquitetura.md).
 
@@ -90,7 +90,7 @@ Detalhes em [docs/arquitetura.md](docs/arquitetura.md).
 ### 1. Suba o banco de dados
 
 ```bash
-docker compose up -d fcg-postgres
+docker compose up -d cloudgames-postgres
 ```
 
 > O PostgreSQL sobe na porta **5433** do host (mapeada para 5432 no container) para não conflitar com outros bancos locais.
@@ -99,7 +99,7 @@ docker compose up -d fcg-postgres
 ### 2. Execute a API
 
 ```bash
-dotnet run --project src/FCG.Api
+dotnet run --project src/PosTech.Fiap.CloudGames.Api
 ```
 
 As **migrations** e o **seed** (admin + jogos de exemplo) são aplicados automaticamente no startup (ambiente Development).
@@ -125,7 +125,7 @@ A API sobe em **http://localhost:5080** e o Swagger abre em **http://localhost:5
 ```bash
 # ferramenta local já fixada no manifesto (.config/dotnet-tools.json)
 dotnet tool restore
-dotnet dotnet-ef database update --project src/FCG.Infrastructure --startup-project src/FCG.Api
+dotnet dotnet-ef database update --project src/PosTech.Fiap.CloudGames.Infrastructure --startup-project src/PosTech.Fiap.CloudGames.Api
 ```
 
 ---
@@ -194,11 +194,11 @@ Autenticação via **JWT Bearer**. O token carrega os claims `sub` (id), `email`
 **Credenciais do administrador (seed):**
 
 ```
-e-mail: admin@fcg.com
+e-mail: admin@cloudgames.com
 senha:  Admin@123
 ```
 
-Configuração do JWT em [`appsettings.json`](src/FCG.Api/appsettings.json) (`Jwt:SecretKey`, `Issuer`, `Audience`, `ExpirationMinutes`).
+Configuração do JWT em [`appsettings.json`](src/PosTech.Fiap.CloudGames.Api/appsettings.json) (`Jwt:SecretKey`, `Issuer`, `Audience`, `ExpirationMinutes`).
 
 ---
 
@@ -227,11 +227,11 @@ dotnet test
 
 | Projeto | Tipo | Cobertura |
 |---|---|---|
-| `FCG.Domain.Tests` | Unitário (TDD) | Value objects (Email, senha, Money) e regras de entidade (biblioteca sem duplicatas, faixa de desconto…) |
-| `FCG.Application.Tests` | Unitário (Moq) | Casos de uso: cadastro, login, criação de jogo, aquisição com/sem promoção |
-| `FCG.Bdd.Tests` | **BDD** (Reqnroll) | Módulo de autenticação — cadastro + login em cenários Gherkin |
+| `PosTech.Fiap.CloudGames.Domain.Tests` | Unitário (TDD) | Value objects (Email, senha, Money) e regras de entidade (biblioteca sem duplicatas, faixa de desconto…) |
+| `PosTech.Fiap.CloudGames.Application.Tests` | Unitário (Moq) | Casos de uso: cadastro, login, criação de jogo, aquisição com/sem promoção |
+| `PosTech.Fiap.CloudGames.Bdd.Tests` | **BDD** (Reqnroll) | Módulo de autenticação — cadastro + login em cenários Gherkin |
 
-> **62 testes** no total. O módulo de autenticação é validado também por **BDD** (arquivo [`Autenticacao.feature`](test/FCG.Bdd.Tests/Features/Autenticacao.feature)).
+> **62 testes** no total. O módulo de autenticação é validado também por **BDD** (arquivo [`Autenticacao.feature`](test/PosTech.Fiap.CloudGames.Bdd.Tests/Features/Autenticacao.feature)).
 
 ---
 
@@ -248,16 +248,16 @@ dotnet test
 ## 📁 Estrutura do projeto
 
 ```
-fcg-api/
+postech-fiap-cloudgames/
 ├── src/
-│   ├── FCG.Domain/          # entidades, VOs, eventos, interfaces de repositório
-│   ├── FCG.Application/     # casos de uso, DTOs, validações, abstrações
-│   ├── FCG.Infrastructure/  # EF Core, Dapper, JWT, BCrypt, seed, migrations
-│   └── FCG.Api/             # Minimal API, middleware, Swagger, GraphQL
+│   ├── PosTech.Fiap.CloudGames.Domain/          # entidades, VOs, eventos, interfaces de repositório
+│   ├── PosTech.Fiap.CloudGames.Application/     # casos de uso, DTOs, validações, abstrações
+│   ├── PosTech.Fiap.CloudGames.Infrastructure/  # EF Core, Dapper, JWT, BCrypt, seed, migrations
+│   └── PosTech.Fiap.CloudGames.Api/             # Minimal API, middleware, Swagger, GraphQL
 ├── test/
-│   ├── FCG.Domain.Tests/
-│   ├── FCG.Application.Tests/
-│   └── FCG.Bdd.Tests/       # Reqnroll (BDD)
+│   ├── PosTech.Fiap.CloudGames.Domain.Tests/
+│   ├── PosTech.Fiap.CloudGames.Application.Tests/
+│   └── PosTech.Fiap.CloudGames.Bdd.Tests/       # Reqnroll (BDD)
 ├── docs/                    # DDD (Event Storming, Domain Storytelling, arquitetura)
 ├── docker-compose.yml       # PostgreSQL + pgAdmin
 └── Fcg.sln

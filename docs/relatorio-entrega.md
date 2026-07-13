@@ -41,8 +41,8 @@
 ## Como executar (resumo)
 
 ```bash
-docker compose up -d fcg-postgres     # PostgreSQL (porta 5433)
-dotnet run --project src/FCG.Api      # aplica migrations + seed e sobe em http://localhost:5080
+docker compose up -d cloudgames-postgres     # PostgreSQL (porta 5433)
+dotnet run --project src/PosTech.Fiap.CloudGames.Api      # aplica migrations + seed e sobe em http://localhost:5080
 dotnet test                           # 62 testes (unitários + BDD)
 ```
 
