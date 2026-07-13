@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FCG.Api.GraphQL;
 
+/// <summary>
+/// Requisito (Desafio Fase 1 · RT-08, opcional): "utilizar GraphQL para consulta avançada de jogos,
+/// permitindo filtragens dinâmicas".
+/// </summary>
 public sealed class Query
 {
     /// <summary>Catálogo de jogos ativos com filtragem e ordenação dinâmicas.</summary>

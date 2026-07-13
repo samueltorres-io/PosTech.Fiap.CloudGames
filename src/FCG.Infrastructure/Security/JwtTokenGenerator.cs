@@ -8,6 +8,10 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace FCG.Infrastructure.Security;
 
+/// <summary>
+/// Requisito (Desafio Fase 1 · RF-03): "implementar autenticação via token JWT".
+/// Emite o token com os claims de identidade e o papel (role) do usuário.
+/// </summary>
 public sealed class JwtTokenGenerator : IJwtTokenGenerator
 {
     private readonly JwtSettings _settings;

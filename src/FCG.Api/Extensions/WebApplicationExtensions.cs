@@ -15,6 +15,7 @@ public static class WebApplicationExtensions
 
         app.UseSerilogRequestLogging();
 
+        // Requisito (Desafio Fase 1 · RT-07): documentação Swagger dos endpoints.
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
@@ -27,6 +28,8 @@ public static class WebApplicationExtensions
         return app;
     }
 
+    // Requisito (Desafio Fase 1 · RT-05): API .NET 8 no padrão Minimal API,
+    // com endpoints agrupados por feature.
     public static WebApplication MapFcgEndpoints(this WebApplication app)
     {
         app.MapGet("/health", () => Results.Ok(new { status = "healthy" })).WithTags("Health").AllowAnonymous();

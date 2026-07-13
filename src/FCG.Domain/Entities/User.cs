@@ -6,7 +6,10 @@ using FCG.Domain.ValueObjects;
 
 namespace FCG.Domain.Entities;
 
-/// <summary>Raiz de agregado: usuário da plataforma e sua biblioteca de jogos.</summary>
+/// <summary>
+/// Requisito (Desafio Fase 1 · RF-01): "identificação do cliente por nome, e-mail e senha".
+/// Raiz de agregado: usuário da plataforma e sua biblioteca de jogos.
+/// </summary>
 public sealed class User : Entity
 {
     private readonly List<UserGame> _library = new();

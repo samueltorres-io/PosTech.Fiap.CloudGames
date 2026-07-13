@@ -1,3 +1,13 @@
+// ============================================================================
+//  FIAP Cloud Games (FCG) — Tech Challenge Fase 1
+//  Composição da aplicação (enunciado em docs/desafio.md; rastreabilidade em
+//  docs/requisitos-atendidos.md). Requisitos técnicos atendidos aqui:
+//   - RT-05: API .NET 8 no padrão Minimal API (endpoints em MapFcgEndpoints).
+//   - RT-06: middleware de erros + logs estruturados (Serilog abaixo).
+//   - RT-07: documentação Swagger (AddApiServices / UseApiPipeline).
+//   - RT-08: GraphQL (AddApiServices) · RF-03/RF-04: autenticação e papéis JWT.
+// ============================================================================
+
 using FCG.Api.Extensions;
 using FCG.Application;
 using FCG.Infrastructure;
@@ -6,7 +16,7 @@ using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Log estruturado com Serilog (console + arquivo diário).
+// Requisito (Desafio Fase 1 · RT-06): logs estruturados com Serilog (console + arquivo diário).
 builder.Host.UseSerilog((context, configuration) => configuration
     .MinimumLevel.Information()
     .MinimumLevel.Override("Microsoft.AspNetCore", LogEventLevel.Warning)

@@ -1,4 +1,6 @@
 # language: pt
+# Requisito (Desafio Fase 1 · RT-10): "aplicar TDD ou BDD em pelo menos um dos módulos".
+# Este é o módulo escolhido para BDD — autenticação (cadastro + login).
 Funcionalidade: Autenticação de usuários
   Para acessar a plataforma FIAP Cloud Games
   Como um jogador

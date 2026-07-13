@@ -31,6 +31,8 @@ public static class ApiServiceCollectionExtensions
         return services;
     }
 
+    // Requisito (Desafio Fase 1 · RF-03/RF-04): autenticação JWT e dois níveis de acesso
+    // (policy "Admin" para cadastro de jogos, administração de usuários e promoções).
     private static IServiceCollection AddAuthenticationAndAuthorization(this IServiceCollection services, IConfiguration configuration)
     {
         var jwt = configuration.GetSection(JwtSettings.SectionName).Get<JwtSettings>() ?? new JwtSettings();

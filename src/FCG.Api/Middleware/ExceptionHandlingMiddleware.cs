@@ -6,7 +6,10 @@ using ValidationException = FluentValidation.ValidationException;
 
 namespace FCG.Api.Middleware;
 
-/// <summary>Converte exceções não tratadas em respostas ProblemDetails (RFC 7807) com log estruturado.</summary>
+/// <summary>
+/// Requisito (Desafio Fase 1 · RT-06): "middleware para tratamento de erros e logs estruturados".
+/// Converte exceções não tratadas em respostas ProblemDetails (RFC 7807) com log estruturado.
+/// </summary>
 public sealed class ExceptionHandlingMiddleware
 {
     private readonly RequestDelegate _next;

@@ -3,9 +3,10 @@ using FCG.Domain.Exceptions;
 namespace FCG.Domain.ValueObjects;
 
 /// <summary>
-/// Senha em texto puro validada pela política de segurança do desafio
-/// (mínimo de 8 caracteres, com letras, números e caracteres especiais).
-/// Objeto transitório: nunca é persistido — apenas o hash resultante é armazenado.
+/// Requisito (Desafio Fase 1 · RF-02): "senha segura (mínimo de 8 caracteres com
+/// números, letras e caracteres especiais)".
+/// Senha em texto puro validada pela política de segurança — objeto transitório:
+/// nunca é persistido, apenas o hash resultante é armazenado.
 /// </summary>
 public sealed class Password
 {

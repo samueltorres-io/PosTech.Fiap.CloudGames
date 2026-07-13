@@ -5,6 +5,8 @@
 
 A FCG é o MVP de uma plataforma de venda de jogos digitais. Esta primeira fase entrega um **monólito** organizado com **DDD / Clean Architecture**, persistência com **Entity Framework Core + PostgreSQL**, autenticação **JWT** com dois níveis de acesso, documentação **Swagger**, consultas de alta performance com **Dapper**, consultas dinâmicas via **GraphQL** e cobertura de testes **unitários + BDD**.
 
+> 📚 **Projeto didático.** O enunciado do desafio está transcrito em **[docs/desafio.md](docs/desafio.md)**, cada requisito recebe um identificador (`RF-xx`/`RT-xx`) e a **[matriz de rastreabilidade](docs/requisitos-atendidos.md)** mostra onde cada um foi atendido. Esses mesmos identificadores aparecem em comentários `Requisito (Desafio Fase 1): ...` ao longo do código.
+
 ---
 
 ## 📋 Índice
@@ -233,8 +235,10 @@ dotnet test
 
 ---
 
-## 📐 Documentação de DDD
+## 📐 Documentação
 
+- **[O desafio](docs/desafio.md)** — enunciado transcrito do PDF, com os requisitos identificados (`RF-xx`/`RT-xx`).
+- **[Requisitos atendidos](docs/requisitos-atendidos.md)** — matriz de rastreabilidade requisito → código.
 - **[Event Storming](docs/event-storming/README.md)** — fluxos de **criação de usuários** e **criação de jogos** (comandos, eventos, agregados, políticas e read models).
 - **[Domain Storytelling](docs/domain-storytelling/README.md)** — cenário "usuário adquire um jogo".
 - **[Arquitetura](docs/arquitetura.md)** — contexto delimitado, agregados e camadas.

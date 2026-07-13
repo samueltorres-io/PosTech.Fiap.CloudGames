@@ -3,7 +3,10 @@ using FCG.Domain.Exceptions;
 
 namespace FCG.Domain.ValueObjects;
 
-/// <summary>E-mail válido e normalizado (minúsculas, sem espaços nas bordas).</summary>
+/// <summary>
+/// Requisito (Desafio Fase 1 · RF-02): "validar formato de e-mail".
+/// E-mail válido e normalizado (minúsculas, sem espaços nas bordas).
+/// </summary>
 public sealed partial class Email
 {
     public string Value { get; }

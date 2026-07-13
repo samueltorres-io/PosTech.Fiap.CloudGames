@@ -4,7 +4,10 @@ using FCG.Application.Games.Dtos;
 
 namespace FCG.Infrastructure.Persistence.Dapper;
 
-/// <summary>Consultas de leitura com Dapper (catálogo e biblioteca).</summary>
+/// <summary>
+/// Requisito (Desafio Fase 1 · RT-04, opcional): "utilizar Dapper para consultas de alta performance".
+/// Consultas de leitura (catálogo com preço promocional efetivo e biblioteca do usuário).
+/// </summary>
 public sealed class GameReadQueries : IGameReadQueries
 {
     private readonly IDbConnectionFactory _connectionFactory;
