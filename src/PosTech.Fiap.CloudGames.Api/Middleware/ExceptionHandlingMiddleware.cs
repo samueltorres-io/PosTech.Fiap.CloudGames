@@ -12,6 +12,8 @@ namespace PosTech.Fiap.CloudGames.Api.Middleware;
 /// </summary>
 public sealed class ExceptionHandlingMiddleware
 {
+    private const string ProblemJsonContentType = "application/problem+json";
+
     private readonly RequestDelegate _next;
     private readonly ILogger<ExceptionHandlingMiddleware> _logger;
 
@@ -42,6 +44,17 @@ public sealed class ExceptionHandlingMiddleware
         else
             _logger.LogWarning("Requisição rejeitada ({Status}): {Message}", status, exception.Message);
 
+        if (context.Response.HasStarted)
+        {
+            _logger.LogError(
+                "Resposta já iniciada para {Method} {Path}; conexão abortada sem ProblemDetails.",
+                context.Request.Method,
+                context.Request.Path);
+
+            context.Abort();
+            return;
+        }
+
         ProblemDetails problem = exception is ValidationException validation
             ? new ValidationProblemDetails(ToErrors(validation))
             {
@@ -61,8 +74,8 @@ public sealed class ExceptionHandlingMiddleware
 
         context.Response.Clear();
         context.Response.StatusCode = status;
-        context.Response.ContentType = "application/problem+json";
-        await context.Response.WriteAsJsonAsync(problem, problem.GetType());
+
+        await context.Response.WriteAsJsonAsync(problem, problem.GetType(), options: null, contentType: ProblemJsonContentType);
     }
 
     private static (int Status, string Title) Map(Exception exception) => exception switch
